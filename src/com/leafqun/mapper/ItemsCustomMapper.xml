@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leafqun.mapper.ItemsCustomMapper" >
+  <sql id="query_items_where">
+  	<if test="items!=null">
+  		<if test="items.name!=null and items.name!=''">
+  			items.name like '%${items.name}%'
+  		</if>
+  	</if>
+  </sql>
+  <select id="selectByName" parameterType="ItemsQueryVo" resultType="Items">
+  	select * from items
+  	<where>
+  		<include refid="query_items_where"></include>
+  	</where>
+  </select>
+</mapper>
